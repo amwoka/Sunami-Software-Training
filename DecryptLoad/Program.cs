@@ -15,12 +15,10 @@ namespace DecryptLoad
         static void Main(string[] args)
         {
       
-            //OpenFileDialog ofd = new OpenFileDialog();
-          //  var path = @"C:\Users\user\Documents\AprilAirt.xlsx";
+          
+            var path = @"C:\Users\user\Documents\Training_File\customers-encrypted.tsv";
             var words = new List<String> { };
-           // var eachWord = "";
-            //  var readData = "";
-            Console.WriteLine("Do you wish to open a file? N/Y");
+               Console.WriteLine("Do you wish to open a file? N/Y");
             var response1 = Console.ReadLine();
             switch(response1.ToUpper())
             {
@@ -28,13 +26,16 @@ namespace DecryptLoad
                 
                 case "Y":
 
-                    //var readData = File.ReadAllText(path);
-                    //    var eachWord = readData.Split("\t");
-                    //    foreach (var word in eachWord)
-                    //    {
-                    //        Console.WriteLine(word + "\n");
-                    //    }
-                    Program.readExcel();
+                    var readData = File.ReadAllText(path);
+                    var bytesValue = Convert.FromBase64String(readData);
+                    var plainText = System.Text.Encoding.UTF8.GetString(bytesValue);
+                    //  var decrypted = BitConverter.ToString(bytesValue).Split("\t");
+                    var decrypted = plainText.Split("\t");
+                    foreach (var word in decrypted)
+                    {
+                        Console.WriteLine(word + "\n");
+                    }
+                 //   Program.readExcel();
                     break;
                 case "N":
                     break;
@@ -43,7 +44,8 @@ namespace DecryptLoad
             }
                 
         }
-       static void readExcel()
+        /*
+        static void readExcel()
         {
             string con =
     @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\user\Documents\Kilifi_Project.xlsx;" +
@@ -62,5 +64,7 @@ namespace DecryptLoad
                 }
             }
         }
+        */
     }
+
 }
