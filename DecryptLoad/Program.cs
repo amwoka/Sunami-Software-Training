@@ -16,7 +16,7 @@ namespace DecryptLoad
        
          static void Main(string[] args)
         {
-            Entry newEntry = new Entry("","","","");
+            Entry newEntry = new Entry();
           //path to the file to be decrypted
             var path = @"C:\Users\user\Documents\Training_File\customers-encrypted.tsv";
           //  var words = new List<String> { };
@@ -48,7 +48,7 @@ namespace DecryptLoad
                     {
                         var val = newEntry.decodeEntries(decrypted, index);
 
-                      //  Console.WriteLine("{0}{1}{2}{3}",val.Id,val.First_name,val.Last_name,val.Phone);
+                        Console.WriteLine("{0}{1}{2}{3}",val.Id,val.First_name,val.Last_name,val.Phone);
                         index += 4;
                         if (stringLength - index < index) break;
                     }
@@ -92,6 +92,8 @@ namespace DecryptLoad
     }
      class Entry
      {
+        public Entry()
+        { }
         public Entry(String id, String first_name, String last_name, String phone)
         {
             Id = id;
