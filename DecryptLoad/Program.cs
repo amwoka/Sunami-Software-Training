@@ -48,7 +48,7 @@ namespace DecryptLoad
                     {
                         var val = newEntry.decodeEntries(decrypted, index);
 
-                        Console.WriteLine("{0}{1}{2}{3}",val.Id,val.First_name,val.Last_name,val.Phone);
+                        Console.WriteLine(String.Format("{0}{1}{2}{3}",val.Id,val.First_name,val.Last_name,val.Phone));
                         index += 4;
                         if (stringLength - index < index) break;
                     }
