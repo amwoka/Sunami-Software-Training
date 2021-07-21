@@ -16,7 +16,7 @@ namespace DecryptLoad
        
          static void Main(string[] args)
         {
-            Entry decree = new Entry("","","","");
+            Entry newEntry = new Entry("","","","");
           //path to the file to be decrypted
             var path = @"C:\Users\user\Documents\Training_File\customers-encrypted.tsv";
           //  var words = new List<String> { };
@@ -37,7 +37,7 @@ namespace DecryptLoad
                     //After decryption, get each word separated by a tab
                     var decrypted = plainText.Split("\t");
                  //   Console.WriteLine(decrypted[0]);
-                 var val = decree.decodeEntries(decrypted).Id;
+                 var val = newEntry.decodeEntries(decrypted).Id;
                     
                     Console.WriteLine(val);
                  //   Program.readExcel();
