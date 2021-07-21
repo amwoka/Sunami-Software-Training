@@ -23,6 +23,7 @@ namespace DecryptLoad
           // Propmt user to initiate file reading and get response
                Console.WriteLine("Do you wish to open a file? N/Y");
             var response1 = Console.ReadLine();
+           
             switch(response1.ToUpper())
             {
 
@@ -36,10 +37,21 @@ namespace DecryptLoad
                     //  var decrypted = BitConverter.ToString(bytesValue).Split("\t");
                     //After decryption, get each word separated by a tab
                     var decrypted = plainText.Split("\t");
-                 //   Console.WriteLine(decrypted[0]);
-                 var val = newEntry.decodeEntries(decrypted).Id;
-                    
-                    Console.WriteLine(val);
+                    //foreach (var i in decrypted)
+                    //{
+                    //    Console.WriteLine(i);
+                    //}
+                    //Iterate to find all the values from TSV file
+                    var stringLength = decrypted.Length;
+                    var index = 0;
+                    while (index < stringLength)
+                    {
+                        var val = newEntry.decodeEntries(decrypted, index);
+
+                      //  Console.WriteLine("{0}{1}{2}{3}",val.Id,val.First_name,val.Last_name,val.Phone);
+                        index += 4;
+                        if (stringLength - index < index) break;
+                    }
                  //   Program.readExcel();
                     break;
                 case "N":
@@ -94,20 +106,13 @@ namespace DecryptLoad
         public string Last_name { get; }
         public string Phone { get; }
 
-        public Entry decodeEntries(String[] entryArray)
+        public Entry decodeEntries(String[] entryArray,int stringIndex)
         {
-            var n = 0;
-            var i = 0;
-          //  n = entryArray.Length;
-            //  Console.WriteLine(entryArray.Length);
-               var assignEachEntry = new Entry(entryArray[n], entryArray[n + 1], entryArray[n + 2], entryArray[n + 3]);
-           // var assignEachEntry = new Entry("e", "f", "g", "h");
-          //    Console.WriteLine(assignEachEntry.First_name);
-            //  i += 4;
-
-
-
-            return assignEachEntry;
+     
+           
+                var assignEachEntry = new Entry(entryArray[stringIndex], entryArray[stringIndex + 1], entryArray[stringIndex + 2], entryArray[stringIndex + 3]);
+            
+                return assignEachEntry;
         }
 
      }
