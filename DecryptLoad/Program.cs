@@ -12,12 +12,15 @@ namespace DecryptLoad
 {
     class Program
     {
-        static void Main(string[] args)
+       
+       
+         static void Main(string[] args)
         {
-      
-          
+            Entry decree = new Entry("","","","");
+          //path to the file to be decrypted
             var path = @"C:\Users\user\Documents\Training_File\customers-encrypted.tsv";
-            var words = new List<String> { };
+          //  var words = new List<String> { };
+          // Propmt user to initiate file reading and get response
                Console.WriteLine("Do you wish to open a file? N/Y");
             var response1 = Console.ReadLine();
             switch(response1.ToUpper())
@@ -25,16 +28,18 @@ namespace DecryptLoad
 
                 
                 case "Y":
-
+                    //Initiate file reading
                     var readData = File.ReadAllText(path);
+                    //Convert from base64 encryption to an array of bytes
                     var bytesValue = Convert.FromBase64String(readData);
                     var plainText = System.Text.Encoding.UTF8.GetString(bytesValue);
                     //  var decrypted = BitConverter.ToString(bytesValue).Split("\t");
+                    //After decryption, get each word separated by a tab
                     var decrypted = plainText.Split("\t");
-                    foreach (var word in decrypted)
-                    {
-                        Console.WriteLine(word + "\n");
-                    }
+                 //   Console.WriteLine(decrypted[0]);
+                 var val = decree.decodeEntries(decrypted).Id;
+                    
+                    Console.WriteLine(val);
                  //   Program.readExcel();
                     break;
                 case "N":
@@ -44,7 +49,14 @@ namespace DecryptLoad
             }
                 
         }
+
+      
+
+      
+
+
         /*
+         //Read from an excel file
         static void readExcel()
         {
             string con =
@@ -66,5 +78,38 @@ namespace DecryptLoad
         }
         */
     }
+     class Entry
+     {
+        public Entry(String id, String first_name, String last_name, String phone)
+        {
+            Id = id;
+            First_name = first_name;
+            Last_name = last_name;
+            Phone = phone;
+
+        }
+
+        public string Id { get;}
+        public string First_name { get; }
+        public string Last_name { get; }
+        public string Phone { get; }
+
+        public Entry decodeEntries(String[] entryArray)
+        {
+            var n = 0;
+            var i = 0;
+          //  n = entryArray.Length;
+            //  Console.WriteLine(entryArray.Length);
+               var assignEachEntry = new Entry(entryArray[n], entryArray[n + 1], entryArray[n + 2], entryArray[n + 3]);
+           // var assignEachEntry = new Entry("e", "f", "g", "h");
+          //    Console.WriteLine(assignEachEntry.First_name);
+            //  i += 4;
+
+
+
+            return assignEachEntry;
+        }
+
+     }
 
 }
